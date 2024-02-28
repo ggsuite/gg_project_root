@@ -5,25 +5,29 @@
 // found in the LICENSE file in the root of this package.
 
 // #############################################################################
+import 'dart:io';
+
 import 'package:args/command_runner.dart';
 
 /// Gg Project Root
 class GgProjectRoot {
-  /// Constructor
-  GgProjectRoot({
-    required this.param,
-    required this.log,
-  });
+  /// Returns the project root
+  static String? getSync(String path) {
+    // Is path directory? If not, use parent directory
+    final dir =
+        FileSystemEntity.isFileSync(path) ? File(path).parent : Directory(path);
 
-  /// The param to work with
-  final String param;
+    // Iterate directory and its parent until pubspec.yaml is found
+    var parent = dir;
+    while (parent.path != '/') {
+      final pubspec = File('${parent.path}/pubspec.yaml');
+      if (pubspec.existsSync()) {
+        return parent.path;
+      }
+      parent = parent.parent;
+    }
 
-  /// The log function
-  final void Function(String msg) log;
-
-  /// The function to be executed
-  Future<void> exec() async {
-    log('Executing ggProjectRoot with param $param');
+    return null;
   }
 }
 
@@ -42,31 +46,29 @@ class GgProjectRootCmd extends Command<dynamic> {
   @override
   final name = 'ggProjectRoot';
   @override
-  final description = 'Add your description here.';
+  final description = 'Outputs the dart or flutter project root';
 
   // ...........................................................................
   @override
   Future<void> run() async {
-    var param = argResults?['param'] as String;
-    GgProjectRoot(
-      param: param,
-      log: log,
-    );
-
-    await GgProjectRoot(
-      param: param,
-      log: log,
-    ).exec();
+    var path = argResults?['path'] as String;
+    final result = GgProjectRoot.getSync(path);
+    if (result != null) {
+      log(result);
+      exitCode = 0;
+    } else {
+      throw Exception('No project root found.');
+    }
   }
 
   // ...........................................................................
   void _addArgs() {
     argParser.addOption(
-      'param',
+      'path',
       abbr: 'p',
-      help: 'The param to work with',
-      valueHelp: 'param',
-      mandatory: true,
+      help: 'The path the project root is searched for.',
+      mandatory: false,
+      defaultsTo: '.',
     );
   }
 }

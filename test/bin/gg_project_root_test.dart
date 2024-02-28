@@ -7,7 +7,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:colorize/colorize.dart';
 import 'package:gg_capture_print/gg_capture_print.dart';
 import 'package:test/test.dart';
 
@@ -26,33 +25,20 @@ void main() {
         stderrEncoding: utf8,
       );
 
-      final expectedMessages = [
-        'Invalid argument(s): Option',
-        Colorize('param').red().toString(),
-        'is mandatory.',
-      ];
-
       final stdout = result.stdout as String;
-
-      for (final msg in expectedMessages) {
-        expect(stdout, contains(msg));
-      }
+      expect(stdout, '.\n');
     });
   });
 
   // ###########################################################################
   group('run(args, log)', () {
-    group('with args=[--param, value]', () {
-      test('should print "value"', () async {
+    group('with args=[--path, value]', () {
+      test('should print the project dir', () async {
         // Execute bin/gg_project_root.dart and check if it prints "value"
         final messages = <String>[];
-        await run(args: ['--param', '5'], log: messages.add);
+        await run(args: ['--path', '.'], log: messages.add);
 
-        final expectedMessages = ['Executing ggProjectRoot with param 5'];
-
-        for (final msg in expectedMessages) {
-          expect(hasLog(msg, messages), isTrue);
-        }
+        expect(hasLog('.', messages), isTrue);
       });
     });
   });
