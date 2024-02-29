@@ -38,7 +38,7 @@ void main() {
         final messages = <String>[];
         await run(args: ['--path', '.'], log: messages.add);
 
-        expect(hasLog('.', messages), isTrue);
+        expect(hasLog(messages, '.'), isTrue);
       });
     });
   });

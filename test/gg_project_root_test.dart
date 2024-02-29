@@ -85,7 +85,7 @@ void main() {
     test('should log the project root', () async {
       createPubSpec();
       await runner.run(['ggProjectRoot', '--path', subDir.path]);
-      expect(hasLog(rootDir.path, messages), isTrue);
+      expect(hasLog(messages, rootDir.path), isTrue);
     });
   });
 }
