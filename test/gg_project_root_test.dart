@@ -62,7 +62,7 @@ void main() {
   group('GetProjectRootCmd', () {
     final messages = <String>[];
     final runner = CommandRunner<void>('gg_project_root', 'Test')
-      ..addCommand(GgProjectRootCmd(log: messages.add));
+      ..addCommand(GgProjectRootCmd(ggLog: messages.add));
 
     test(
         'should throw if the specified path '

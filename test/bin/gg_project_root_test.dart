@@ -36,7 +36,7 @@ void main() {
       test('should print the project dir', () async {
         // Execute bin/gg_project_root.dart and check if it prints "value"
         final messages = <String>[];
-        await run(args: ['--path', '.'], log: messages.add);
+        await run(args: ['--path', '.'], ggLog: messages.add);
 
         expect(hasLog(messages, '.'), isTrue);
       });

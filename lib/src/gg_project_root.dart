@@ -8,6 +8,7 @@
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
+import 'package:gg_log/gg_log.dart';
 
 /// Gg Project Root
 class GgProjectRoot {
@@ -35,12 +36,12 @@ class GgProjectRoot {
 /// The command line interface for GgProjectRoot
 class GgProjectRootCmd extends Command<dynamic> {
   /// Constructor
-  GgProjectRootCmd({required this.log}) {
+  GgProjectRootCmd({required this.ggLog}) {
     _addArgs();
   }
 
   /// The log function
-  final void Function(String message) log;
+  final GgLog ggLog;
 
   // ...........................................................................
   @override
@@ -54,7 +55,7 @@ class GgProjectRootCmd extends Command<dynamic> {
     var path = argResults?['path'] as String;
     final result = GgProjectRoot.getSync(path);
     if (result != null) {
-      log(result);
+      ggLog(result);
       exitCode = 0;
     } else {
       throw Exception('No project root found.');
