@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.1] - 2024-04-09
 
 ### Changed
 
@@ -12,4 +12,4 @@
 
 - Initial version.
 
-[Unreleased]: https://github.com/inlavigo/gg_project_root/compare/1.0.0...HEAD
+[1.0.1]: https://github.com/inlavigo/gg_project_root/compare/1.0.0...1.0.1
