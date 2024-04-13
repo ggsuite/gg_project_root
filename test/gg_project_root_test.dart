@@ -23,8 +23,11 @@ void main() {
   }
 
   // ...........................................................................
-  String? projectRoot(FileSystemEntity item) =>
-      GgProjectRoot.getSync(item.path);
+  String? projectRootSync(FileSystemEntity item, {int depth = 4}) =>
+      GgProjectRoot.getSync(item.path, depth: depth);
+
+  Future<String?> projectRoot(FileSystemEntity item, {int depth = 4}) async =>
+      GgProjectRoot.get(item.path, depth: depth);
 
   // ...........................................................................
   setUp(() {
@@ -40,19 +43,22 @@ void main() {
     group('get(path)', () {
       group('should return the parent path containing a pubspec.yaml file ',
           () {
-        test('for a sub directory and file in subdir', () {
+        test('for a sub directory and file in subdir', () async {
           createPubSpec();
-          expect(projectRoot(subDir), rootDir.path);
-          expect(projectRoot(file), rootDir.path);
+          expect(projectRootSync(subDir), rootDir.path);
+          expect(await projectRoot(subDir), rootDir.path);
+
+          expect(projectRootSync(file), rootDir.path);
+          expect(await projectRoot(file), rootDir.path);
         });
       });
 
       // #######################################################################
       group('should return null ', () {
         test('when the parent directory does not contain a pubspec.yaml file',
-            () {
-          final result = GgProjectRoot.getSync(subDir.path);
-          expect(result, null);
+            () async {
+          expect(GgProjectRoot.getSync(subDir.path), null);
+          expect(await GgProjectRoot.get(subDir.path), null);
         });
       });
     });
@@ -84,7 +90,8 @@ void main() {
     // .........................................................................
     test('should log the project root', () async {
       createPubSpec();
-      await runner.run(['ggProjectRoot', '--path', subDir.path]);
+      await runner
+          .run(['ggProjectRoot', '--path', subDir.path, '--depth', '4']);
       expect(hasLog(messages, rootDir.path), isTrue);
     });
   });

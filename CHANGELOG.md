@@ -1,6 +1,10 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.4] - 2024-04-13
+
+### Added
+
+- Max depth for limiting the number of folders searched up
 
 ### Removed
 
@@ -30,7 +34,7 @@
 
 - Initial version.
 
-[Unreleased]: https://github.com/inlavigo/gg_project_root/compare/1.0.3...HEAD
+[1.0.4]: https://github.com/inlavigo/gg_project_root/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/inlavigo/gg_project_root/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/inlavigo/gg_project_root/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/inlavigo/gg_project_root/compare/1.0.0...1.0.1
