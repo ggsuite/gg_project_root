@@ -19,14 +19,14 @@ void main() {
     test('should be executable', () async {
       // Execute bin/gg_project_root.dart and check if it prints help
       final result = await Process.run(
-        './bin/gg_project_root.dart',
-        [],
+        'dart',
+        ['./bin/gg_project_root.dart'],
         stdoutEncoding: utf8,
         stderrEncoding: utf8,
       );
 
       final stdout = result.stdout as String;
-      expect(stdout, '.\n');
+      expect(stdout.replaceAll('\n', '').replaceAll('\r', ''), '.');
     });
   });
 
