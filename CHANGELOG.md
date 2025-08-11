@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Add .gitattributes file
+
 ### Changed
 
 - kidney: changed references to git

@@ -16,8 +16,9 @@ class GgProjectRoot {
   /// Goes maximum [depth] directories up.
   static String? getSync(String path, {int depth = 2}) {
     // Is path directory? If not, use parent directory
-    final dir =
-        FileSystemEntity.isFileSync(path) ? File(path).parent : Directory(path);
+    final dir = FileSystemEntity.isFileSync(path)
+        ? File(path).parent
+        : Directory(path);
 
     // Iterate directory and its parent until pubspec.yaml is found
     var parent = dir;

@@ -41,25 +41,29 @@ void main() {
   group('GgProjectRoot', () {
     // #########################################################################
     group('get(path)', () {
-      group('should return the parent path containing a pubspec.yaml file ',
-          () {
-        test('for a sub directory and file in subdir', () async {
-          createPubSpec();
-          expect(projectRootSync(subDir), rootDir.path);
-          expect(await projectRoot(subDir), rootDir.path);
+      group(
+        'should return the parent path containing a pubspec.yaml file ',
+        () {
+          test('for a sub directory and file in subdir', () async {
+            createPubSpec();
+            expect(projectRootSync(subDir), rootDir.path);
+            expect(await projectRoot(subDir), rootDir.path);
 
-          expect(projectRootSync(file), rootDir.path);
-          expect(await projectRoot(file), rootDir.path);
-        });
-      });
+            expect(projectRootSync(file), rootDir.path);
+            expect(await projectRoot(file), rootDir.path);
+          });
+        },
+      );
 
       // #######################################################################
       group('should return null ', () {
-        test('when the parent directory does not contain a pubspec.yaml file',
-            () async {
-          expect(GgProjectRoot.getSync(subDir.path), null);
-          expect(await GgProjectRoot.get(subDir.path), null);
-        });
+        test(
+          'when the parent directory does not contain a pubspec.yaml file',
+          () async {
+            expect(GgProjectRoot.getSync(subDir.path), null);
+            expect(await GgProjectRoot.get(subDir.path), null);
+          },
+        );
       });
     });
   });
@@ -70,8 +74,7 @@ void main() {
     final runner = CommandRunner<void>('gg_project_root', 'Test')
       ..addCommand(GgProjectRootCmd(ggLog: messages.add));
 
-    test(
-        'should throw if the specified path '
+    test('should throw if the specified path '
         'does not contain a pubspec.yaml file', () async {
       expect(pubspec.existsSync(), isFalse);
 
@@ -90,8 +93,13 @@ void main() {
     // .........................................................................
     test('should log the project root', () async {
       createPubSpec();
-      await runner
-          .run(['ggProjectRoot', '--path', subDir.path, '--depth', '4']);
+      await runner.run([
+        'ggProjectRoot',
+        '--path',
+        subDir.path,
+        '--depth',
+        '4',
+      ]);
       expect(hasLog(messages, rootDir.path), isTrue);
     });
   });
