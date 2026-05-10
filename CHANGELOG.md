@@ -9,6 +9,7 @@
 ### Changed
 
 - kidney: changed references to git
+- gg\_multi: changed references to git
 
 ### Removed
 

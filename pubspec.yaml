@@ -11,9 +11,13 @@ dependencies:
   args: ^2.4.2
   colorize: ^3.0.0
   gg_args:
-    path: ../gg_args # ^2.0.1
+    git:
+      url: git@github.com:ggsuite/gg_args.git
+      ref: ticket-test
   gg_log:
-    path: ../gg_log # ^1.0.0
+    git:
+      url: git@github.com:ggsuite/gg_log.git
+      ref: ticket-test
   gg_process: ^1.0.1
   path: ^1.8.0
 
