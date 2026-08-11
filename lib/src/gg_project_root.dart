@@ -9,6 +9,7 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:gg_log/gg_log.dart';
+import 'package:gg_process/gg_process.dart';
 
 /// Gg Project Root
 class GgProjectRoot {
@@ -84,7 +85,7 @@ class GgProjectRootCmd extends Command<dynamic> {
     final result = await GgProjectRoot.get(path, depth: depth);
     if (result != null) {
       ggLog(result);
-      exitCode = 0;
+      ggExitCode = 0;
     } else {
       throw Exception('No project root found.');
     }
