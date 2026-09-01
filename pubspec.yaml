@@ -1,6 +1,6 @@
 name: gg_project_root
 description: Returns the dart project root for a given folder by looking for pubspec_yaml.dart
-version: 2.1.0
+version: 2.1.1
 repository: https://github.com/inlavigo/gg_project_root.git
 
 environment:
@@ -9,8 +9,8 @@ environment:
 dependencies:
   args: ^2.7.0
   colorize: ^3.0.0
-  gg_args: ^3.1.0
-  gg_log: ^1.1.0
+  gg_args: ^3.1.1
+  gg_log: ^1.2.0
   gg_process: ^1.2.0
   path: ^1.9.1
 
