@@ -9,4 +9,4 @@
 // coverage:ignore-file
 
 /// The version of the `gg_project_root` package.
-const String ggProjectRootVersion = '2.2.3';
+const String ggProjectRootVersion = '2.2.4';
